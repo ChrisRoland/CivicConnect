@@ -94,9 +94,8 @@ export default function Header() {
 
             {user ? (
               <>
-                <span className="text-sm text-gray-600 px-2">
-                  {user.email.trim().slice(0, 4)}...
-                  {user.email.trim().slice(10) || "Anonymous"}
+                <span className="text-sm bg-green-950 rounded-full text-white font-bold py-1 px-2 uppercase">
+                  {user.email.trim().slice(0, 5) || "Anonymous"}
                 </span>
                 <button
                   onClick={async () => {
