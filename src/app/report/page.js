@@ -9,6 +9,7 @@ import {
   signInAnonymously,
 } from "@/lib/supabase";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -239,10 +240,12 @@ export default function ReportPage() {
 
               {imagePreview ? (
                 <div className="relative">
-                  <img
+                  <Image
                     src={imagePreview}
                     alt="Preview"
                     className="w-full h-64 object-cover rounded-lg"
+                    width={800}
+                    height={400}
                   />
                   <button
                     type="button"

@@ -33,6 +33,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     applyFilter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [issues, statusFilter]);
 
   async function loadIssues() {
@@ -150,7 +151,7 @@ export default function AdminDashboard() {
           {loading ? (
             <div className="p-12 text-center">
               <Image
-                src="/ccLoading.gif"
+                src="/assets/ccLoading.gif"
                 alt="Loading"
                 width={100}
                 height={100}

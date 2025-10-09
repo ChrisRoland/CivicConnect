@@ -41,8 +41,8 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className=" p-2 rounded-lg">
-              <Image src={Logo} width={100} height={100} alt="Logo" />
+            <div className=" rounded-lg">
+              <Image src={Logo} width={70} height={70} alt="Logo" />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-2xl font-bold text-gray-900">CivicConnect</h1>

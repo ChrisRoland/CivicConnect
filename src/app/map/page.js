@@ -45,6 +45,7 @@ export default function MapPage() {
 
   useEffect(() => {
     applyFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [issues, filters]);
 
   async function loadIssues() {
@@ -104,10 +105,12 @@ export default function MapPage() {
       <Header />
 
       {/* Page Controls */}
-      <div className="absolute border-gray-200 px-4 py-3">
+      <div className="absolute top-20 left-8 border-gray-200 px-4 py-3 z-[1000]">
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition cursor-pointer"
+          className={`flex items-center space-x-2 px-4 py-2 ${
+            showFilters ? "hidden" : "bg-green-600"
+          } text-white rounded-lg hover:bg-green-700 transition cursor-pointer`}
         >
           {showFilters ? <X size={18} /> : <Filter size={18} />}
           <span>{showFilters ? "Hide Filters" : "Show Filters"}</span>
@@ -126,7 +129,7 @@ export default function MapPage() {
               <h3 className="font-bold text-gray-900">Filters</h3>
               <button
                 onClick={() => setShowFilters(false)}
-                className="p-1 hover:bg-gray-100 rounded"
+                className="p-1 hover:bg-gray-100 rounded cursor-pointer"
               >
                 <X size={20} />
               </button>
@@ -229,7 +232,7 @@ export default function MapPage() {
             <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
               <div className="text-center">
                 <Image
-                  src="/ccLoading.gif"
+                  src="/assets/ccLoading.gif"
                   alt="Loading"
                   width={100}
                   height={100}
@@ -285,7 +288,7 @@ export default function MapPage() {
                       </div>
                       <p className="text-xs text-gray-500">{issue.category}</p>
                       {issue.image_url && (
-                        <img
+                        <Image
                           src={issue.image_url}
                           alt={issue.title}
                           className="mt-2 rounded w-full h-32 object-cover"
@@ -301,7 +304,10 @@ export default function MapPage() {
           )}
 
           {/* Legend */}
-          <div className="absolute bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 border border-gray-200 z-100">
+          {/* <div
+            className="absolute bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 border border-gray-200"
+            style={{ zIndex: 9999 }}
+          >
             <h4 className="font-semibold text-sm text-gray-900 mb-2">
               Status Legend
             </h4>
@@ -319,7 +325,7 @@ export default function MapPage() {
                 <span className="text-xs text-gray-600">Resolved</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

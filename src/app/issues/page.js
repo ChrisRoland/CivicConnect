@@ -152,7 +152,7 @@ export default function ReportedIssuesPage() {
             {loading ? (
               <div className="text-center py-12">
                 <Image
-                  src="/ccLoading.gif"
+                  src="/assets/ccLoading.gif"
                   alt="Loading"
                   width={100}
                   height={100}
