@@ -2,7 +2,7 @@
 
 CivicConnect is a modern web platform that bridges the gap between citizens and local authorities by enabling easy reporting, tracking, and resolution of community issues. From potholes to broken streetlights, CivicConnect makes civic engagement accessible to everyone.
 
-![CivicConnect](https://via.placeholder.com/1200x400/2563eb/ffffff?text=CivicConnect)
+![CivicConnect](/public/assets/image.png)
 
 ## Features
 

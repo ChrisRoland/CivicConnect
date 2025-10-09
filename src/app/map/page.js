@@ -41,10 +41,27 @@ export default function MapPage() {
   const markerRefs = useRef({});
 
   // Default center (you can change this to your city)
-  const defaultCenter = [40.7128, -74.006]; // New York City
+  const defaultCenter = [40.7128, -74.006]; // New York City fallback
 
   useEffect(() => {
     loadIssues();
+
+    // Get user's location after component mounts
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setMapCenter([latitude, longitude]);
+        },
+        (error) => {
+          // User denied location or error occurred, mapCenter remains default
+          console.log(
+            "User location not available. Using default center.",
+            error
+          );
+        }
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -267,12 +284,8 @@ export default function MapPage() {
             </div>
           ) : (
             <MapContainer
-              center={
-                filteredIssues.length > 0
-                  ? [filteredIssues[0].latitude, filteredIssues[0].longitude]
-                  : defaultCenter
-              }
-              zoom={13}
+              center={mapCenter}
+              zoom={mapZoom}
               style={{ height: "100%", width: "100%" }}
               ref={mapRef}
             >
