@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Filter, X, TrendingUp } from "lucide-react";
 import { getIssues } from "@/lib/supabase";
 import Header from "@/components/Header";
@@ -35,6 +35,10 @@ export default function MapPage() {
   });
   const [showFilters, setShowFilters] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState(null);
+  const [mapCenter, setMapCenter] = useState([40.7128, -74.006]); // New York City
+  const [mapZoom, setMapZoom] = useState(13);
+  const mapRef = useRef(null);
+  const markerRefs = useRef({});
 
   // Default center (you can change this to your city)
   const defaultCenter = [40.7128, -74.006]; // New York City
@@ -86,6 +90,22 @@ export default function MapPage() {
       default:
         return "#6b7280"; // gray
     }
+  }
+
+  function handleIssueClick(issue) {
+    setSelectedIssue(issue);
+    // Fly to the issue location on the map
+    if (mapRef.current) {
+      mapRef.current.flyTo([issue.latitude, issue.longitude], 16, {
+        duration: 1.5,
+      });
+    }
+    // Open the marker popup
+    setTimeout(() => {
+      if (markerRefs.current[issue.id]) {
+        markerRefs.current[issue.id].openPopup();
+      }
+    }, 1600);
   }
 
   const categories = [
@@ -189,8 +209,12 @@ export default function MapPage() {
               {filteredIssues.map((issue) => (
                 <div
                   key={issue.id}
-                  onClick={() => setSelectedIssue(issue)}
-                  className="p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-green-300 cursor-pointer transition"
+                  onClick={() => handleIssueClick(issue)}
+                  className={`p-3 bg-gray-50 rounded-lg border-2 cursor-pointer transition ${
+                    selectedIssue?.id === issue.id
+                      ? "border-green-500 bg-green-50"
+                      : "border-gray-200 hover:border-green-300"
+                  }`}
                 >
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="font-semibold text-sm text-gray-900">
@@ -250,6 +274,7 @@ export default function MapPage() {
               }
               zoom={13}
               style={{ height: "100%", width: "100%" }}
+              ref={mapRef}
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -260,6 +285,11 @@ export default function MapPage() {
                 <Marker
                   key={issue.id}
                   position={[issue.latitude, issue.longitude]}
+                  ref={(ref) => {
+                    if (ref) {
+                      markerRefs.current[issue.id] = ref;
+                    }
+                  }}
                 >
                   <Popup>
                     <div className="p-2 min-w-[200px]">
