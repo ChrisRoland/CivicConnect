@@ -6,7 +6,7 @@ import { getCurrentUser, signOut } from "@/lib/supabase";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Logo from "/public/assets/ccLogo.png";
+import Logo from "/assets/ccLogo.png";
 
 export default function Header() {
   const [user, setUser] = useState(null);
@@ -87,7 +87,6 @@ export default function Header() {
                 }`}
                 title="Admin Dashboard"
               >
-                
                 <span>Admin</span>
               </Link>
             )}
@@ -171,7 +170,6 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <div className="flex items-center space-x-2">
-
                   <span>Admin Dashboard</span>
                 </div>
               </Link>
