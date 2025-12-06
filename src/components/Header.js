@@ -6,7 +6,7 @@ import { getCurrentUser, signOut } from "@/lib/supabase";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Logo from "/assets/ccLogo.png";
+import Logo from "../../public/assets/ccLogo.png";
 
 export default function Header() {
   const [user, setUser] = useState(null);
