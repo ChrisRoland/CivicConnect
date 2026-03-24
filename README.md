@@ -221,7 +221,6 @@ MIT License - Feel free to use this for your community!
 
 ## Acknowledgments
 
-- Built for Hacktivism II
 - Powered by Supabase, Next.js, and Tailwind CSS
 - Maps by OpenStreetMap & Leaflet
 
